@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+
         return ResponseEntity.ok(reservationService.save(reservation));
     }
 
