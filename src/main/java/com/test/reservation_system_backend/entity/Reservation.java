@@ -12,6 +12,7 @@ public class Reservation {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     private String serviceType;

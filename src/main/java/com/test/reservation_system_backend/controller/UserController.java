@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -23,12 +25,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
         boolean isAuthenticated = userService.authenticateUser(user.getUsername(), user.getPassword());
         if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+            Optional<User> userLogin = userService.findByUsername(user.getUsername());
+            return ResponseEntity.ok(userLogin.get());
         } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
+            return ResponseEntity.status(401).body(null);
         }
     }
 }

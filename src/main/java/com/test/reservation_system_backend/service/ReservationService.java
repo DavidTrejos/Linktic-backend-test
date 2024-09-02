@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +24,23 @@ public class ReservationService {
     }
 
     public void delete(Long id) {
-        reservationRepository.deleteById(id);
+        try{
+            System.out.println("Entro"+id);
+            reservationRepository.deleteById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public List<Reservation> findAllByUserId(Long id) {
+        return reservationRepository.findAllByUserId(id);
+    }
+
+    public List<Reservation> findAllById(Long id) {
+        List<Long> ids = new ArrayList<>();
+        ids.add(id);
+        return reservationRepository.findAllById(ids);
     }
 
     public Reservation update(Long id, Reservation reservation) {
