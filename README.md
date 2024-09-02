@@ -43,6 +43,8 @@ Start the frontend application:
 bash
 npm start
 
+The backend will run on http://localhost:8080.
+
 The application will run by default on http://localhost:3000.
 Database Setup:
 
